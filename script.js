@@ -1,3 +1,9 @@
+function removeActive() {
+  const activeButtons = document.getElementsByClassName("active");
+  for (const i of activeButtons) {
+    i.classList.remove("active");
+  }
+}
 // All about loading
 function showLoading() {
   let loadingContainer = document.getElementById("loading");
@@ -32,7 +38,7 @@ function loadLessons() {
       let buttonsHTML = "";
       data.data.forEach((lesson) => {
         buttonsHTML += `
-            <button class="btn hover:bg-[#00BCFF]  hover:text-white flex items-center gap-4 p-2 rounded-lg w-32"
+            <button id="id-${lesson.level_no}" class="btn flex items-center gap-4 p-2 rounded-lg w-32"
             onclick="showWords(${lesson.level_no})"
             >
               <img src="./assets/fa-book-open.png" alt="book icon" class="w-5 h-5"/> 
@@ -45,11 +51,14 @@ function loadLessons() {
     });
 }
 function showWords(level) {
+  removeActive();
   showLoading();
   const url = `https://openapi.programming-hero.com/api/level/${level}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      const clickedButton = document.getElementById(`id-${level}`);
+      clickedButton.classList.add("active");
       let all = data.data;
       let cardContainer = document.getElementById("cards");
       cardContainer.innerHTML = ``;
@@ -59,7 +68,8 @@ function showWords(level) {
         let warning = document.createElement("section");
         warning.classList.add("col-span-full");
         warning.innerHTML = `
-        <div class="p-10 bg-slate-200 m-20 rounded-lg">
+        <div class="p-10 bg-slate-200 m-20 rounded-lg flex flex-col justify-center items-center">
+         <img src="./assets/alert-error.png" alt="" />
         <h1 class="font-bold text-[60px] text-center">No Words Found !!!</h1>
       </div>
         `;
@@ -69,15 +79,19 @@ function showWords(level) {
       for (let i of all) {
         let card = document.createElement("div");
         card.classList.add("p-10");
+        let meaning = i.meaning;
+        if (meaning === null) {
+          meaning = "অর্থ নেই";
+        }
         card.innerHTML = `
         <div
           class="card w-[400px] p-4 flex flex-col gap-4 justify-center items-center border-2 border-black"
         >
           <h1 class="font-bold text-[40px]">${i.word}</h1>
           <p class="text-[32px]">Meaning/Pronounciation</p>
-          <h1 class="font-semibold text-[20px]">"${i.meaning}/${i.pronunciation}"</h1>
+          <h1 class="font-semibold text-[20px]">"${meaning}/${i.pronunciation}"</h1>
           <div class="logo w-full flex justify-between">
-            <button class="btn" id="details-btn">
+            <button class="btn" id="details-btn" onclick="displayModal(${i.id})">
               <img class="w-10" src="./assets/info.png" alt="" />
             </button>
             <button class="btn">
@@ -112,6 +126,53 @@ function handleLogin() {
   } else {
     alert("Invalid Password.Contact To Your Admin.");
   }
+}
+function displayModal(id) {
+  let url = `https://openapi.programming-hero.com/api/word/${id}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const modalConatainer = document.getElementById("modal-container");
+      let word = data.data.word;
+      let pronunciation = data.data.pronunciation;
+      let meaning = data.data.meaning;
+      if (meaning === null) {
+        meaning = "অর্থ নেই";
+      }
+      let sentence = data.data.sentence;
+      let synonyms = data.data.synonyms;
+      if (synonyms.length < 1) {
+        modalConatainer.innerHTML = `
+      <h1 class="text-lg font-bold text-[30px] mb-4">${word}:(${pronunciation})</h1>
+          <h1 class="font-bold text-[30px] mb-4">Meaning</h1>
+          <p class="text-[22px] mb-4">${meaning}</p>
+          <h1 class="font-bold text-[30px] mb-4">Example</h1>
+          <p class="text-[22px] mb-4">${sentence}</p>
+          <h1 class="font-bold text-[30px] mb-4">সমার্থক শব্দগুলো</h1>
+          <div class="buttons flex gap-3 mb-4">
+            <button class="btn">সমার্থক শব্দ পাওয়া যায়নি</button>
+            
+          </div>
+          <button class="btn btn-outline btn-primary">Complete</button>
+      `;
+      } else {
+        modalConatainer.innerHTML = `
+      <h1 class="text-lg font-bold text-[30px] mb-4">${word}:(${pronunciation})</h1>
+          <h1 class="font-bold text-[30px] mb-4">Meaning</h1>
+          <p class="text-[22px] mb-4">${meaning}</p>
+          <h1 class="font-bold text-[30px] mb-4">Example</h1>
+          <p class="text-[22px] mb-4">${sentence}</p>
+          <h1 class="font-bold text-[30px] mb-4">সমার্থক শব্দগুলো</h1>
+          <div class="buttons flex gap-3 mb-4">
+            <button class="btn">${synonyms[0]}</button>
+            <button class="btn">${synonyms[1]}</button>
+            <button class="btn">${synonyms[2]}</button>
+          </div>
+          <button class="btn btn-outline btn-primary">Complete</button>
+      `;
+      }
+      document.getElementById("dada").showModal();
+    });
 }
 
 // Attach event listener to the Get started button

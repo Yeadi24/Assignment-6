@@ -12,6 +12,10 @@
         font-weight: 400;
         font-style: normal;
       }
+      .active {
+        background-color: #00bcff;
+        color: white;
+      }
     </style>
     <!-- Daisy UI -->
     <link
@@ -85,22 +89,14 @@
       </section>
     </header>
     <main>
-      <section class="modal p-10">
-        <!-- Open the modal using ID.showModal() method -->
-        <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
-        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-          <div class="modal-box">
-            <h3 class="text-lg font-bold">Hello!</h3>
-            <p class="py-4">Press ESC key or click the button below to close</p>
-            <div class="modal-action">
-              <form method="dialog">
-                <!-- if there is a button in form, it will close the modal -->
-                <button class="btn">Close</button>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      </section>
+      <!-- Open the modal using ID.showModal() method -->
+      <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
+      <dialog id="dada" class="modal">
+        <div class="modal-box" id="modal-container"></div>
+        <form method="dialog">
+          <button>close</button>
+        </form>
+      </dialog>
       <section id="lesson_card_container"></section>
       <section id="learn" class="mt-10 hidden">
         <h1 class="font-bold text-[40px] text-center">
