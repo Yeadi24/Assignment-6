@@ -127,6 +127,10 @@ function handleLogin() {
     alert("Invalid Password.Contact To Your Admin.");
   }
 }
+function closeModal() {
+  document.getElementById("dada").close();
+}
+
 function displayModal(id) {
   let url = `https://openapi.programming-hero.com/api/word/${id}`;
   fetch(url)
@@ -154,6 +158,7 @@ function displayModal(id) {
             
           </div>
           <button class="btn btn-outline btn-primary">Complete</button>
+          
       `;
       } else {
         modalConatainer.innerHTML = `
@@ -168,7 +173,7 @@ function displayModal(id) {
             <button class="btn">${synonyms[1]}</button>
             <button class="btn">${synonyms[2]}</button>
           </div>
-          <button class="btn btn-outline btn-primary">Complete</button>
+        
       `;
       }
       document.getElementById("dada").showModal();
