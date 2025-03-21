@@ -1,0 +1,19 @@
+ <div
+          class="card flex flex-col gap-2 justify-center items-center w-96 h-60 border-1"
+        >
+          <h1 class="text-[36px] font-bold">Eager</h1>
+          <p class="text-[30px]">Meaning/Pronounciation</p>
+          <h1 class="text-[36px] font-bold">"আগ্রহী / ইগার"</h1>
+          <div class="icon flex gap-48">
+            <img
+              class="w-6 h-6"
+              src="https://img.icons8.com/?size=160&id=6cdJEps4HrFl&format=png"
+              alt=""
+            />
+            <img
+              class="w-6 h-6"
+              src="https://img.icons8.com/?size=100&id=2902&format=png"
+              alt=""
+            />
+          </div>
+        </div>

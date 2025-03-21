@@ -4,6 +4,245 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>English Moja</title>
+    <!-- Google Font Hind Siliguri -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
+      .hind-siliguri {
+        font-family: "Hind Siliguri", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+    </style>
+    <!-- Daisy UI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body></body>
+  <body class="hind-siliguri">
+    <header>
+      <nav class="bg-[#c6bdbd41] hidden border-b-2 border-[#a8a4a4]">
+        <div class="flex flex-row justify-between px-6 py-4">
+          <div class="left flex gap-0">
+            <h1 class="text-[26px] font-serif">English</h1>
+            <img src="./assets/logo.png" alt="" />
+            <h1 class="text-[26px]">জানালা</h1>
+          </div>
+          <div class="right flex gap-4">
+            <button
+              id="faq-btn"
+              class="btn btn-outline hover:bg-[#1fecec9a] hover:text-white"
+            >
+              <img src="./assets/fa-circle-question.png" alt="" />FAQ
+            </button>
+            <button
+              id="learn-btn"
+              class="btn btn-outline hover:bg-[#1fecec89] hover:text-white"
+            >
+              <img src="./assets/fa-book-open.png" alt="" />Learn
+            </button>
+            <button
+              id="logout"
+              class="btn btn-outline hover:bg-[#1fecec7b] hover:text-white"
+            >
+              <img
+                src="./assets/fa-arrow-right-from-bracket.png"
+                alt=""
+              />LogOut
+            </button>
+          </div>
+        </div>
+      </nav>
+      <section id="banner" class="flex justify-between px-24 pt-10">
+        <div class="login flex flex-col gap-4 justify-center">
+          <h1 class="title font-bold text-[40px]">
+            <span class="text-[#25c5e1]">English</span> is Easy !!!
+          </h1>
+          <p class="text-[20px]">
+            আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা
+            আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে
+            অন্য একটি Level এ
+          </p>
+          <input type="text" placeholder="Enter Name" class="input" />
+          <label class="input validator">
+            <input
+              type="password"
+              required
+              placeholder="Enter (123456)"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+            />
+          </label>
+          <button
+            class="btn btn-soft w-28 bg-[#422AD5] hover:bg-[#2ea2d4c0] text-white"
+          >
+            Get started
+          </button>
+        </div>
+        <img src="./assets/hero-student.png" alt="" />
+      </section>
+    </header>
+    <main>
+      <section class="modal p-10">
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <h3 class="text-lg font-bold">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </section>
+      <section id="lesson_card_container"></section>
+      <section id="learn" class="mt-10 hidden">
+        <h1 class="font-bold text-[40px] text-center">
+          <span class="text-[#00BCFF]">Let's </span>Learn Vocabularies
+        </h1>
+        <div id="lessons"></div>
+        <div
+          id="loading"
+          class="mt-10 mb-10"
+          style="display: none; text-align: center"
+        ></div>
+        <div id="cards" class="grid grid-cols-3"></div>
+        <div
+          id="warning"
+          class="p-10 my-10 mb-20 flex flex-col justify-center items-center bg-[#7e7a771b]"
+        >
+          <p class="text-[18px]">আপনি এখনো কোন Lesson Select করেন নি</p>
+          <br />
+          <h1 class="font-bold text-[40px]">একটি Lesson Select করুন</h1>
+        </div>
+      </section>
+      <section id="faq" class="hidden mt-10 flex flex-col">
+        <h1 class="font-bold text-[40px] text-center">
+          <span class="text-[#00BCFF]">Frequently </span>Asked Questions
+        </h1>
+        <div class="questions p-20">
+          <div
+            class="collapse collapse-arrow bg-base-100 border border-base-300 text-[26px]"
+          >
+            <input type="radio" name="my-accordion-2" checked="checked" />
+            <div class="collapse-title font-semibold">
+              1.The difference between var, let, and const
+            </div>
+            <div class="collapse-content text-[20px]">
+              var: Function-scoped, can be redeclared and updated, hoisted with
+              undefined.
+              <br />
+              let: Block-scoped, can be updated but not redeclared, hoisted
+              without initialization.
+              <br />
+              const: Block-scoped, cannot be updated or redeclared, must be
+              initialized during declaration.
+            </div>
+          </div>
+          <div
+            class="collapse collapse-arrow bg-base-100 border text-[26px] border-base-300"
+          >
+            <input type="radio" name="my-accordion-2" />
+            <div class="collapse-title font-semibold">
+              2.The difference between map(), forEach(), and filter()
+            </div>
+            <div class="collapse-content text-[20px]">
+              map(): Returns a new array by transforming each element using a
+              callback function.
+              <br />
+              forEach(): Iterates over an array without returning a new array,
+              just executes a function on each item.
+              <br />
+              filter(): Returns a new array containing only elements that
+              satisfy a given condition.
+            </div>
+          </div>
+          <div
+            class="collapse collapse-arrow bg-base-100 border text-[26px] border-base-300"
+          >
+            <input type="radio" name="my-accordion-2" />
+            <div class="collapse-title font-semibold">
+              3.Explain arrow functions and how they are different from regular
+              functions
+            </div>
+            <div class="collapse-content text-[20px]">
+              Arrow functions are a concise way to write functions using =>
+              syntax. They don't have their own this, so they inherit this from
+              their surrounding scope, unlike regular functions. Additionally,
+              arrow functions cannot be used as constructors and do not have the
+              arguments object.
+            </div>
+          </div>
+          <div
+            class="collapse collapse-arrow bg-base-100 border text-[26px] border-base-300"
+          >
+            <input type="radio" name="my-accordion-2" />
+            <div class="collapse-title font-semibold">
+              4.How JavaScript Promises work
+            </div>
+            <div class="collapse-content text-[20px]">
+              JavaScript Promises represent a value that may not be available
+              yet but will be resolved in the future. A promise has three
+              states: pending, resolved (fulfilled), or rejected. You can handle
+              the result using .then() for success or .catch() for errors once
+              the promise is settled.
+            </div>
+          </div>
+          <div
+            class="collapse collapse-arrow bg-base-100 border text-[26px] border-base-300"
+          >
+            <input type="radio" name="my-accordion-2" />
+            <div class="collapse-title font-semibold">
+              5.How closures work in JavaScript
+            </div>
+            <div class="collapse-content text-[20px]">
+              Closures in JavaScript allow a function to remember and access
+              variables from its lexical scope even after the outer function has
+              finished execution. This means inner functions can access
+              variables from their outer function even when called outside of
+              it. Closures are often used for data encapsulation and maintaining
+              state.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="pt-10 px-10 pb-2 flex justify-between bg-[#dbcecec8]">
+      <div class="l flex flex-col gap-2">
+        <div class="left flex gap-0">
+          <h1 class="text-[26px] font-serif">English</h1>
+          <img src="./assets/logo.png" alt="" />
+          <h1 class="text-[26px]">জানালা</h1>
+        </div>
+        <h1 class="text-[26px]">ইংরেজি শিখুন সহজে</h1>
+        <p>Providing ED-Tech Applications since 2025</p>
+      </div>
+      <div class="r">
+        <nav>
+          <h6 class="font-bold text-[20px] mb-4 text-center">Follow Us</h6>
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><img class="w-12" src="./assets/facebook.png" alt=""
+            /></a>
+            <a href="https://www.youtube.com/" target="_blank"
+              ><img class="w-12" src="./assets/youtube.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img class="w-12" src="./assets/instagram.png" alt=""
+            /></a>
+            <a href="https://github.com/" target="_blank"
+              ><img class="w-12" src="./assets/github.png" alt=""
+            /></a>
+          </div>
+        </nav>
+      </div>
+    </footer>
+    <script src="./script.js"></script>
+  </body>
 </html>
