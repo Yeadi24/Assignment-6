@@ -108,7 +108,7 @@ function handleLogin() {
   const nameInput = document.querySelector("input[type='text']");
   const passwordInput = document.querySelector("input[type='password']");
 
-  if (nameInput.value && passwordInput.value === "1") {
+  if (nameInput.value && passwordInput.value === "123456") {
     // Hide the banner
     document.getElementById("banner").style.display = "none";
 
